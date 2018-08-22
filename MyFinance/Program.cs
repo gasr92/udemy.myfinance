@@ -20,6 +20,8 @@ namespace MyFinance
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
+                .UseKestrel() // permite o uso de servidor linux
+                .UseIISIntegration()
                 .Build();
     }
 }
