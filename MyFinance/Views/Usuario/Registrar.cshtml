@@ -1,0 +1,41 @@
+﻿@model UsuarioModel
+
+@{
+
+    var msg = @TempData["MensagemLoginInvalido"];
+
+    if(msg != null)
+    {
+        <div class="alert alert-danger">
+            <strong>Atenção: </strong> msg
+        </div>
+    }
+
+}
+
+    <h3>Nova conta</h3>
+
+    <br/>
+
+        <form asp-controller="Usuario" asp-action="Registrar">
+
+            <div class="form-group">
+                <label for="nome">Email:</label>
+                <input type="text" class="form-control" id="nome" asp-for="Nome">
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" id="email" asp-for="Email">
+            </div>
+            <div class="form-group">
+                <label for="pwd">Senha:</label>
+                <input type="password" class="form-control" id="pwd" asp-for="Senha">
+            </div>
+            <div class="form-group">
+                <label for="datanascimento">Data nascimento:</label>
+                <input type="date" class="form-control" id="datanascimento" asp-for="Data_Nascimento">
+            </div>
+
+            <button type="submit" class="btn btn-success btn-block">Criar conta</button>
+
+        </form> 
