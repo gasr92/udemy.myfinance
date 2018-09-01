@@ -28,8 +28,19 @@ namespace MyFinance.Controllers
         }
 
         [HttpPost]
-        [HttpGet]
         public IActionResult Registrar(UsuarioModel p_user)
+        {
+            if(ModelState.IsValid)
+            {
+                p_user.RegistrarUsuario();
+                return RedirectToAction("Sucesso");
+            }
+
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult Registrar()
         {
             return View();
         }
@@ -45,12 +56,20 @@ namespace MyFinance.Controllers
                 HttpContext.Session.SetString("NomeUsuarioLogado",p_usuario.Nome);
                 HttpContext.Session.SetString("IdUsuarioLogado",p_usuario.Id.ToString());
 
-                return RedirectToAction("Index","Home");
+                return RedirectToAction("Menu","Home");
             }
 
 
             TempData["MensagemLoginInvalido"] = "Dados inválidos";
             return RedirectToAction("Login");
         }
+
+        public IActionResult Sucesso()
+        {
+            return View();
+        }
+
+
+
     }
 }

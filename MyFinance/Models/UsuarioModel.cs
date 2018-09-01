@@ -1,6 +1,7 @@
 ﻿using MyFinance.Util;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -9,9 +10,17 @@ namespace MyFinance.Models
     public class UsuarioModel
     {
         public int Id { get; set; }
+
+        [Required(ErrorMessage = "Informe o nome")]
         public string Nome { get; set; }
+
+        [Required(ErrorMessage = "{0} é obrigatório")]
         public string Email { get; set; }
+
+        [Required(ErrorMessage = "Informe a {0}")]
         public string Senha { get; set; }
+
+        [Required(ErrorMessage = "Informe a data de nascimento")]
         public DateTime Data_Nascimento { get; set; }
 
 
@@ -32,6 +41,15 @@ namespace MyFinance.Models
             }
 
             return false;
+        }
+
+        public void RegistrarUsuario()
+        {
+
+            string data = Data_Nascimento.ToString("yyyy/MM/dd");
+            var sql = $"Insert Into usuario (nome, email, senha, data_nascimento) values ('{Nome}', '{Email}', '{Senha}', '{data}')";
+            var obj = new DAL();
+            obj.Executar(sql);
         }
     }
 }
