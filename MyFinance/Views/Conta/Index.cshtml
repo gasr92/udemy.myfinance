@@ -3,5 +3,32 @@
     ViewData["Title"] = "Index";
 }
 
-<h2>Index</h2>
+<h2>Minhas contas</h2>
 
+<table class="table table-hover table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nome</th>
+            <th>Saldo</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+
+            foreach(var item in (List<ContaModel>)ViewBag.ListaConta)
+            {
+        <tr>
+            <td>@item.Id.ToString()</td>
+            <td>@item.Nome.ToString()</td>
+            <td>@item.Saldo.ToString("c")</td>
+            <td><a asp-action="Excluir" asp-controller="Conta" asp-route-id="@item.Id.ToString()" class="btn btn-danger">Excluir</a> </td>
+        </tr>
+            }
+
+        }
+    </tbody>
+</table>
+
+<a asp-controller="Conta" asp-action="CriarConta" class="btn btn-block btn-primary">Nova conta</a>

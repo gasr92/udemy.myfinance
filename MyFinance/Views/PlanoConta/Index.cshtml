@@ -1,7 +1,34 @@
-﻿
-@{
-    ViewData["Title"] = "Index";
+﻿@{
+    ViewData["Title"] = "Plano de contas";
 }
 
-<h2>Index</h2>
+<h2>Plano de contas</h2>
 
+<table class="table table-hover table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Descrição</th>
+            <th>Tipo</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+
+        foreach(var item in (List<PlanoContaModel>)ViewBag.ListaPlanoContas)
+            {
+        <tr>
+            <td>@item.Id.ToString()</td>
+            <td>@item.Descricao.ToString()</td>
+            <td>@item.Tipo.ToString().Replace("R","Receita").Replace("D","Despesa")</td>
+            <td><a asp-action="CriarPlanoConta" asp-controller="PlanoConta" asp-route-id="@item.Id.ToString()" class="btn btn-primary">Editar</a> </td>
+            <td><a asp-action="Excluir" asp-controller="PlanoConta" asp-route-id="@item.Id.ToString()" class="btn btn-danger">Excluir</a> </td>
+        </tr>
+            }
+
+            }
+    </tbody>
+</table>
+
+<a asp-controller="PlanoConta" asp-action="CriarPlanoConta" class="btn btn-block btn-primary">Novo plano de conta</a>
